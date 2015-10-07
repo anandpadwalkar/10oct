@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<button onclick="document.getElementById('popup').style.display=''" style="margin-bottom: 5px" type="button"
-						class="btn btn-success btn-sm">
+						class="btn btn-success btn-sm" data-toggle="tooltip"  data-original-title="Add New Department">
 						<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp; ADD
 					</button>
 				</div>
@@ -56,10 +56,10 @@
 												<tr class="even gradeC">
 											<td>
 												<button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal" onclick="setDeptId(${dept.deptId})">
-													<i class="fa fa-times fa-fw"></i>
+													<i class="fa fa-times fa-fw" data-toggle="tooltip"  data-original-title="Delete"></i>
 												</button>
 												<button type="button" class="btn btn-warning btn-circle" id="update-item" 
-												onclick="updateDept(${dept.deptId}, '${dept.deptName}' )">
+												onclick="updateDept(${dept.deptId}, '${dept.deptName}' )" data-toggle="tooltip" title="" data-original-title="Edit">
 													<i class="fa fa-edit fa-fw" ></i>
 												</button>
 											</td>
@@ -74,10 +74,10 @@
 												<tr class="odd gradeX">
 											<td>
 												<button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal" onclick="setDeptId(${dept.deptId})">
-													<i class="fa fa-times fa-fw"></i>
+													<i class="fa fa-times fa-fw" data-toggle="tooltip"  data-original-title="Delete"></i>
 												</button>
 												<button type="button" class="btn btn-warning btn-circle" id="update-item" 
-												onclick="updateDept(${dept.deptId}, '${dept.deptName}' )">
+												onclick="updateDept(${dept.deptId}, '${dept.deptName}' )" data-toggle="tooltip" data-original-title="Edit">
 													<i class="fa fa-edit fa-fw" ></i>
 												</button>
 											</td>
@@ -164,7 +164,7 @@
 
 			<!-- Model Dialog -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-		<form action="./delete-dept" method="post" id="delete-form">
+		<form action="../master/delete-dept" method="post" id="delete-form">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -172,7 +172,7 @@
                                             <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
                                         </div>
                                         <div class="modal-body">
-                                            Delete this Item ?
+                                            Delete this Department ?
                                         </div>
                                         <input type="hidden" name="deptId" id="delete-deptId">
                                         <div class="modal-footer">
@@ -212,11 +212,11 @@
             responsive: true
     });
 		
-		
+	$("[data-toggle='tooltip']").tooltip();	
 		
 		$("#add-item-btn").click(function(){
 			$("#deptName").val('');
-			$("#add-update-form").prop("action", "./add-dept");
+			$("#add-update-form").prop("action", "../master/add-dept");
 			$("#add-btn").val('Add');
 			validator.resetForm();
 		});
@@ -234,7 +234,7 @@
 	            	},
 	            	deptName: {
 	    	            required: true  ,
-	    	            remote:'./check-complaint-department'  
+	    	            remote:'../master/check-complaint-department'  
 		             }
 	            },
 	            messages: {
@@ -277,7 +277,7 @@
 	
 	$("#deptId").val(deptId);
 		$("#deptName").val(deptName);
-		$("#add-update-form").attr("action", "./update-dept");	
+		$("#add-update-form").attr("action", "../master/update-dept");	
 		$("#add-btn").val('Update');
 		
 		validator.resetForm();

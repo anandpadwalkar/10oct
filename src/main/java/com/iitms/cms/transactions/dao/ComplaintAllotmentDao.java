@@ -9,4 +9,5 @@ import com.iitms.cms.transactions.entity.ComplaintRegisterEntity;
 public interface ComplaintAllotmentDao {
 
 	 public List<ComplaintRegisterEntity> getAllComplaintsAllotment();
+	 public boolean allotComplaints(String complaintIds, int complaintTypeId, int employeeId);
 }

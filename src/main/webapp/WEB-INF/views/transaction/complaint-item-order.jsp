@@ -235,7 +235,7 @@
 
 			<!-- Model Dialog -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-		<form action="./delete-dept" method="post" id="delete-form">
+		<form action="../master/delete-dept" method="post" id="delete-form">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -290,7 +290,7 @@
 		
 		$("#add-item-btn").click(function(){
 			$("#deptname").val('');
-			$("#add-update-form").prop("action", "./add-dept");
+			$("#add-update-form").prop("action", "../master/add-dept");
 			$("#add-btn").val('Add');
 			validator.resetForm();
 		});
@@ -346,7 +346,7 @@
 	function updateDept(deptId, deptName){
 	$("#deptId").val(deptId);
 		$("#deptname").val(deptName);
-		$("#add-update-form").attr("action", "./update-dept");	
+		$("#add-update-form").attr("action", "../master/update-dept");	
 		$("#add-btn").val('Update');
 		
 		validator.resetForm();

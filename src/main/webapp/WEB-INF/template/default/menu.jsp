@@ -31,9 +31,9 @@
 
 						<li><a href="${pageContext.request.contextPath}/master"><i class="glyphicon glyphicon-user"></i> Master <span class="fa arrow"></span></a>
 							<ul class="nav nav-third-level">
-								<li><a href="${pageContext.request.contextPath}/complaint-department">Complaint Department</a></li>
-								<li><a href="${pageContext.request.contextPath}/complaint-type">Complaint Type</a></li>
-								<li><a href="${pageContext.request.contextPath}/complaint-items">Complaint Item</a></li>
+								<li><a href="${pageContext.request.contextPath}/master/complaint-department">Complaint Department</a></li>
+								<li><a href="${pageContext.request.contextPath}/master/complaint-type">Complaint Type</a></li>
+								<li><a href="${pageContext.request.contextPath}/master/complaint-items">Complaint Item</a></li>
 							</ul> <!-- /.nav-third-level --></li>
 
 						<li><a href="${pageContext.request.contextPath}/transaction"><i class="fa fa-refresh"></i> Transaction <span class="fa arrow"></span></a>

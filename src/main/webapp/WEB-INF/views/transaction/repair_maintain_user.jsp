@@ -337,7 +337,7 @@
     });
 		
 		$.ajax({
-			url:"../all-complaint-department",
+			url:"../master/all-complaint-department",
 			type:"POST",
 			success:function(response){
 				//alert(JSON.stringify(response));
@@ -414,6 +414,8 @@
 		});
 		
 		$("#add-btn").click(function(){
+			$("input[name='repair-user-status'][value='Employee']").prop('checked', false);
+			$("input[name='repair-user-status'][value='Admin']").prop('checked', false);
 			//alert
 			var id = $("#id").val();
 			var deptId = $("#deptId").val();
@@ -434,19 +436,6 @@
 		
 			doAjaxPost();
 		});
-		
-		
-		if("${operation}" == "add"){
-			$("#popup").css('display', '');
-			$("#add-update-form").prop("action", "./add-complaint");
-			$("#add-btn").val('Add');
-		}
-		
-		if("${operation}" == "edit"){
-			$("#popup").css('display', '');
-			$("#add-update-form").prop("action", "./update-complaint");
-			$("#add-btn").val('Update');
-		}
 		
 		
 		//
@@ -475,10 +464,15 @@
 		$("#repair-user-id").val(id);
 		$("#repair-user-dept-name").val(deptName);
 		$("#repair-user-employee-name").val(employee);
+		//$('.radio').prop('checked', false);
 		if(status == 'Employee'){
-			$('[value="Employee"]').attr('checked',true);
-		}else
-			$('[value="Admin"]').attr('checked',true);
+			//$('[value="Employee"]').attr('checked',true);
+			$("input[name='repair-user-status'][value='Employee']").prop('checked', true);
+		}else{
+			//$('[value="Admin"]').attr('checked',true);
+			$("input[name='repair-user-status'][value='Admin']").prop('checked', true);
+		}
+			
 		
 	//	$("#repair-user-status").val(id);
 		 //$("#deptId").val(deptId);

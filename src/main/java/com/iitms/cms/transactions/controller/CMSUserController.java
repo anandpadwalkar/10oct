@@ -75,10 +75,18 @@ public class CMSUserController {
 	
 	
 	@RequestMapping(value = "/transaction/get-user-of-dept", method = RequestMethod.POST)
-	public @ResponseBody List<Employee> getEmployeeOfDept(@RequestParam Integer deptId){
+	public @ResponseBody List<Employee> getEmployeeOfDept(@RequestParam( required = false, defaultValue = "0") Integer deptId){
 		List<Employee> list = cmsUserService.getEmployeeOfDept(deptId);
 		return list;
 	}
+	
+	@RequestMapping(value = "/transaction/get-all-user", method = RequestMethod.POST)
+	public @ResponseBody List<Employee> getAllEmployee(){
+		List<Employee> list = cmsUserService.getEmployee();
+		return list;
+	}
+	
+	
 	
 	private JsonResponse addUpdateCMSUser(ComplaintRepairEmployee employee, BindingResult result, String operationType){
 		JsonResponse response = new JsonResponse();

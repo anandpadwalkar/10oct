@@ -48,7 +48,7 @@
 											<th>Complaint Date</th>
 											<th>Name of Complainer</th>
 											<th>Department</th>
-											<th>Complaint Type</th>
+											<th>Status</th>
 											<th>Contact</th>
 										</tr>
 									</thead>
@@ -283,7 +283,7 @@
 						            $(document).ready(function () {
 						               
 						            	$.ajax({
-						        			url:"../all-complaint-department",
+						        			url:"../master/all-complaint-department",
 						        			type:"POST",
 						        			success:function(response){
 						        				//alert(JSON.stringify(response));
@@ -314,7 +314,7 @@
 						        			
 						        			if(deptValue != 0){
 						        				$.ajax({
-						        					url:"../get-complaints",
+						        					url:"../master/get-complaints",
 						        					type:"POST",
 						        					data:{"deptId" : deptValue},
 						        					success:function(response){

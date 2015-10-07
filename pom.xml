@@ -344,11 +344,17 @@
 				</configuration>
 			</plugin>
 			
-		<plugin>
+		<!-- <plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>2.3</version>
-				</plugin>
+				</plugin> -->
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>soanr-maven-plugin</artifactId>
+			<version>2.6</version>
+		</plugin>
+		
 		</plugins>
 	</build>
 
@@ -369,12 +375,12 @@
 
  <properties>  
   <sonar.jdbc.url>
-   jdbc:postgresql://localhost:5433/CMS
+   jdbc:postgresql://localhost:5432/CMS
    </sonar.jdbc.url>    
   <sonar.jdbc.driver>org.postgresql.Driver</sonar.jdbc.driver>
   <sonar.jdbc.username>postgres</sonar.jdbc.username>  
   <sonar.jdbc.password>root</sonar.jdbc.password>  
-    <!-- SERVER ON A REMOTE HOST -->  
+  <!--   SERVER ON A REMOTE HOST   -->
   <sonar.host.url>http://localhost:9000</sonar.host.url>  </properties>
 
 </profile>

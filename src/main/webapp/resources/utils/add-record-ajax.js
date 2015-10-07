@@ -7,6 +7,7 @@ var ajaxProperties = {url:"", data:"", formType:"", operationType:""};
 function doAjaxPost() {
 
 	    $.ajax({
+	    	async:false,
 	        type: "POST",
 	        url: ajaxProperties.url,
 	        data: ajaxProperties.data,
@@ -15,7 +16,7 @@ function doAjaxPost() {
 	        	setResponse(ajaxProperties.formType, JSON.stringify(response));
 	         },
 	         error: function(e){
-	             alert('Error: ' + e);
+	           //  alert('Error: ' + e);
 	         }
 	    });
 	}
@@ -83,6 +84,26 @@ function setResponse(formType, response){
          }
 	}
 	break;
+	
+	case "complaint-allotment":{
+		$("[for='deptId']").html('');
+        $("[for='employeeId']").html('');
+        $("[for='status']").html('');
+       // console.log(response);
+        /*if(response.status == "SUCCESS"){
+            location.href = './user-list';
+         }else{
+        	 $.each(response.result, function(index, errorString){
+        		 
+        		 var array = errorString.split("#");
+        		 $('[for="' +array[0]+ '"]').html(array[1]);
+        	 });
+        	 
+         }*/
+        location.href = '../transaction/complaint-allotment';
 	}
+	break;
+	}
+	
 	
 }

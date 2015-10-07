@@ -18,8 +18,8 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<button onclick="document.getElementById('popup').style.display=''" style="margin-bottom: 5px" type="button"
-						class="btn btn-success btn-sm">
-						<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp; ADD
+						class="btn btn-success btn-sm" id="allot-complaint-btn" data-toggle="tooltip" title="Hooray!">
+						<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp; Allot
 					</button>
 				</div>
 				<div class="col-lg-3 col-md-6"></div>
@@ -42,7 +42,7 @@
 									id="dataTables-example">
 									<thead>
 										<tr>
-											<th>Action
+											<th><input id="checkall" type="checkbox"  value="-1"></th>
 											<th>Sr No</th>
 											<th>Date</th>
 											<th>Complaint</th>
@@ -57,16 +57,12 @@
 										<c:forEach items="${list}" var="complaint">
 										
 											<c:if test="${count%2 eq 0 }">
-												<tr class="even gradeC" ><td>
-												<button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal" onclick="setDeptId(1})">
-													<i class="fa fa-times fa-fw"></i>
-												</button>
-												<button type="button" class="btn btn-warning btn-circle" id="update-item" >
-													<i class="fa fa-edit fa-fw" ></i>
-												</button>
-												<button type="button" class="btn btn-info btn-circle">
-													<i class="fa fa-eye fa-fw"></i>
-												</button>
+												<tr class="even gradeC" >
+												<td>
+											
+												<label class="checkbox-inline"  style="text-align:center">
+                                                <input type="checkbox" value="${complaint.id}" name="complaintId">  
+                                            </label>
 											</td>
 											<td>${count}</td>
 											<td><fmt:formatDate  value="${complaint.complaintDate}" pattern="dd-MM-yyyy"/></td>
@@ -79,7 +75,7 @@
 										<c:if test="${count%2 ne 0 }">
 												<tr class="odd gradeX">
 										   	<td>
-												<button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal" onclick="setDeptId(${dept.deptId})">
+												<%-- <button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal" onclick="setDeptId(${dept.deptId})">
 													<i class="fa fa-times fa-fw"></i>
 												</button>
 												<button type="button" class="btn btn-warning btn-circle" id="update-item" >
@@ -87,7 +83,10 @@
 												</button>
 												<button type="button" class="btn btn-info btn-circle">
 													<i class="fa fa-eye fa-fw"></i>
-												</button>
+												</button> --%>
+												<label class="checkbox-inline"  style="text-align:center">
+                                                <input type="checkbox" value="${complaint.id}" name="complaintId">  
+                                            </label>
 											</td>
 											<td>${count}</td>
 											<td><fmt:formatDate  value="${complaint.complaintDate}" pattern="dd-MM-yyyy"/></td>
@@ -115,69 +114,17 @@
 									<div class="panel panel-primary">
 										<div class="panel-heading">Allotment</div>
 										<div class="panel-body">
-											<form:form commandName="complaintItem" action="./add-item"
-												method="post" class="simple_form form-horizontal"
-												modelAttribute="complaintItem">
-												<div style="display: none">
-													<input name="utf8" type="hidden" value=""><input
-														name="authenticity_token" type="hidden"
-														value="l1ZnmS1VgwqvSJR3i7mBn76i4EUc4JwwwTqtIXwPE+o=">
-												</div>
-
-
-
-<!-- - 
-												<div class="form-group email required user_horizontal_email">
-													<label class="email required col-sm-5 control-label"
-														for="user_horizontal_email"> Complaint No.</label>
-												
-												
-												
-													<div class="col-sm-7">
-														<input class="form-control" placeholder="Complaint No."
-															type="text">
-
-													</div>
-												</div>
-
+											<form  action="./add-item" method="post" class="simple_form form-horizontal" id="complaint-allot-form">
 												<div
 													class="form-group password required user_horizontal_password">
 													<label class="password required col-sm-5 control-label"
-														for="user_horizontal_password"> Complaint Date</label>
+														for="user_horizontal_password"> Complaint Type :</label>
 													<div class="col-sm-7">
-														<div class='input-group date' >
-															<input type='text' id='datetimepicker1' class="form-control" /> <span
-																class="input-group-addon"> <span
-																class="glyphicon glyphicon-calendar"></span>
-															</span>
-														</div>
-
-													</div>
-												</div>
-
-												<div
-													class="form-group password required user_horizontal_password">
-													<label class="password required col-sm-5 control-label"
-														for="user_horizontal_password"> Name of Compaliner</label>
-													<div class="col-sm-7">
-														<input class="form-control" placeholder=" Compaliner"
-															type="text">
-
-													</div>
-												</div>
-
---->
-
-												<div
-													class="form-group password required user_horizontal_password">
-													<label class="password required col-sm-5 control-label"
-														for="user_horizontal_password"> Complaint Name :</label>
-													<div class="col-sm-7">
-														<select id="disabledSelect" class="form-control">
-															<option>Motherboard</option>
-															<option>Computer</option>
+														<select class="form-control" id="complaintTypeId" name="complaintTypeId" >
+															<!-- <option>Motherboard</option>
+															<option>Computer</option> -->
 														</select>
-
+													<label for="complaintTypeId" generated="true" class="error"></label>
 													</div>
 												</div>
 
@@ -186,11 +133,11 @@
 													<label class="password required col-sm-5 control-label"
 														for="user_horizontal_password">Alloted To :</label>
 													<div class="col-sm-7">
-														<select id="disabledSelect" class="form-control">
-															<option>Ravit</option>
-															<option>Kishan</option>
+														<select id="employeeId" name="employeeId" class="form-control">
+															<!-- <option>Ravit</option>
+															<option>Kishan</option> -->
 														</select>
-
+														<label for="employeeId" generated="true" class="error"></label>
 													</div>
 												</div>
 
@@ -198,15 +145,14 @@
 												
 												<div
 													class="form-group password required user_horizontal_password col-sm-6">
-													<input class="btn btn-default" name="commit" type="submit"
-														value=" Save"> <input class="btn btn-default"
+													<input class="btn btn-default" name="commit" type="button"
+														value=" Allot" id="allot"> <input class="btn btn-default"
 														onclick="document.getElementById('popup').style.display='none'"
 														name="commit" type="button" value="Cancel">
-
 												</div>
 
 
-											</form:form>
+											</form>
 										</div>
 
 
@@ -247,7 +193,7 @@
 
 			<!-- Model Dialog -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-		<form action="./delete-dept" method="post" id="delete-form">
+		<form action="../master/delete-dept" method="post" id="delete-form">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -280,7 +226,8 @@
 		
 		
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-    
+  <script src="<c:url value="/resources/utils/add-record-ajax.js"/>"></script>  
+   
     <style type="text/css">
     .error{
     color: red;
@@ -292,6 +239,65 @@
     
 	$(document).ready(function(){
 		
+		 $('[data-toggle="tooltip"]').tooltip();
+		 
+		$.ajax({
+			async:false,
+			url:"../master/get-complaints",
+			type:"POST",
+			data:{"deptId" : 0},
+			success:function(response){
+				var text = '';
+				text += '<option value="0" selected="selected">Select Complaint</option>';
+				if(JSON.stringify(response) != '[]'){
+					$.each(response, function(index, complaint){
+						text += '<option value="'+complaint.id+'">'+complaint.complaintTypeName+'</option>'
+					});
+				}
+				
+				$("#complaintTypeId").html(text);
+				/* if(tempComplaintTypeId != ''){
+					$("#complaintTypeId").val(tempComplaintTypeId);
+				} */
+				
+			},
+			error:function(){
+				
+			}
+		});
+		
+		$.ajax({
+			async:false,
+			url:"../transaction/get-all-user",
+			type:"POST",
+			data:{"deptId" : 0},
+			success:function(response){
+				var text = '';
+				text += '<option value="0" selected="selected">Select Employee</option>';
+				if(JSON.stringify(response) != '[]'){
+					$.each(response, function(index, employee){
+						text += '<option value="'+employee.id+'">'+employee.employeeName+'</option>'
+					});
+				}
+				
+				$("#employeeId").html(text);
+				/* if(tempComplaintTypeId != ''){
+					$("#complaintTypeId").val(tempComplaintTypeId);
+				} */
+				
+			},
+			error:function(){
+				
+			}
+		});
+		
+		/* check all start here*/
+		$('#checkall').click(function (e) {
+		    $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
+		});
+
+		/* check all stop here*/
+		
 		$('#dataTables-example').DataTable({
             responsive: true
     });
@@ -300,7 +306,7 @@
 		
 		$("#add-item-btn").click(function(){
 			$("#deptname").val('');
-			$("#add-update-form").prop("action", "./add-dept");
+			$("#add-update-form").prop("action", "../master/add-dept");
 			$("#add-btn").val('Add');
 			validator.resetForm();
 		});
@@ -309,20 +315,29 @@
 			$("#deptname").val('');
 		});
 		
+		jQuery.validator.addMethod('selectcheck', function (value) {
+	        return (value != '0');
+	    }, "");
+		
 		
 		/* Form Validation */
-		validator = 	$("#add-update-form").validate({
+		validator = 	$("#complaint-allot-form").validate({
 	            rules: {
-	            	deptId:{
-	            		required: false
+	            	complaintTypeId:{
+	            		selectcheck: true
 	            	},
-	            	deptname: {
-	    	            required: true
+	            	employeeId: {
+	            		selectcheck: true
 		             }
-	            },
+	            } ,
 	            messages: {
-	            	deptname: "Please Enter Department"
-	            }/* ,errorPlacement: function(error, element) {
+	            	complaintTypeId: {
+	            		selectcheck : ""
+	            		},
+	            	employeeId: {
+	            		selectcheck : ""
+	            		}
+	            } /* ,errorPlacement: function(error, element) {
 	    			// Append error within linked label
 	    			$( element )
 	    				.closest( "form" )
@@ -334,6 +349,36 @@
 	            } */
 	        });
 			
+		$("#allot-complaint-btn").click(function(){
+			ajaxProperties.url = "../transaction/complaint-allotment";
+			ajaxProperties.formType = "complaint-allotment";
+			ajaxProperties.operationType = "add";
+		});
+		
+	$("#allot").click(function(){
+		//alert('click');
+		var complaints = '';
+        $.each($("input[name='complaintId']:checked"), function(){            
+        	complaints += $(this).val() + ",";
+        });
+        var complaintTypeId = $("#complaintTypeId").val();
+        var employeeId = $("#employeeId").val();
+        var complaintIds = complaints;
+        
+        ajaxProperties.data = {"complaintTypeId": complaintTypeId, "employeeId": employeeId, "complaintIds": complaintIds};
+        //$("#complaint-allot-form").valid();
+      $("[for='employeeId']").html('');
+        $("#complaint-allot-form").valid();
+      
+      if($("#complaint-allot-form").valid() == true && complaintIds == '')
+    	  alert('Please select Complaints to be alloted');
+      else
+    	 // $("#complaint-allot-form").submit();
+        doAjaxPost();
+	});
+		
+	
+	
 		});
 	
 	//});
@@ -356,7 +401,7 @@
 	function updateDept(deptId, deptName){
 	$("#deptId").val(deptId);
 		$("#deptname").val(deptName);
-		$("#add-update-form").attr("action", "./update-dept");	
+		$("#add-update-form").attr("action", "../master/update-dept");	
 		$("#add-btn").val('Update');
 		
 		validator.resetForm();

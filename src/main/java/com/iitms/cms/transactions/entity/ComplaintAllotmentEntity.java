@@ -27,8 +27,8 @@ public class ComplaintAllotmentEntity implements Serializable{
 	private int complaintTypeId;
 	@Column(name = "employeeid")
 	private int employeeId;
-	@Column(name = "deptid")
-	private int deptId;
+	/*@Column(name = "deptid")
+	private int deptId;*/
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employeeId", referencedColumnName = "id", insertable = false, updatable = false, nullable = false)
@@ -62,12 +62,7 @@ public class ComplaintAllotmentEntity implements Serializable{
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-	public int getDeptId() {
-		return deptId;
-	}
-	public void setDeptId(int deptId) {
-		this.deptId = deptId;
-	}
+	
 	public Employee getEmployee() {
 		return employee;
 	}

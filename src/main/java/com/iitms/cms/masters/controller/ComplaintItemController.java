@@ -33,7 +33,7 @@ public class ComplaintItemController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@RequestMapping(value = "/complaint-items", method = RequestMethod.GET)
+	@RequestMapping(value = "/master/complaint-items", method = RequestMethod.GET)
 	public String getComplaintItemForm(@RequestParam(name = "complaint-id", required = false, defaultValue = "0") int complaintId,
 			@RequestParam(name = "op", required = false, defaultValue = "") String operation,Model model){
 		logger.info("Complaint Id : " + complaintId);
@@ -51,11 +51,11 @@ public class ComplaintItemController {
 		
 			model.addAttribute("complaintItem", entity);
 		model.addAttribute("list", list);
-		return "complaint-items";
+		return "/master/complaint-items";
 		//return "register_complaint";
 	}
 	
-	@RequestMapping(value = "/add-item", method = RequestMethod.POST)
+	@RequestMapping(value = "/master/add-item", method = RequestMethod.POST)
 	public @ResponseBody JsonResponse addComplaintItem(@Valid @ModelAttribute("complaintItem") ComplaintItemEntity complaintItem,
 			BindingResult result, Model model){
 		
@@ -65,14 +65,14 @@ public class ComplaintItemController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/delete-item", method = RequestMethod.POST)
+	@RequestMapping(value = "/master/delete-item", method = RequestMethod.POST)
 	public String deleteComplaintItem(@RequestParam Integer  complaintItemId){
 		logger.info("Delete Item : " + complaintItemId);
 		complaintItemService.deleteComplaintItem(complaintItemId);
 		return "redirect:/complaint-items";
 	}
 	
-	@RequestMapping(value = "/update-item", method = RequestMethod.POST)
+	@RequestMapping(value = "/master/update-item", method = RequestMethod.POST)
 	public @ResponseBody JsonResponse updateComplaintItem(@Valid @ModelAttribute("complaintItem") ComplaintItemEntity complaintItem,
 			BindingResult result, @RequestParam(required  = false) Integer  itemId,  Model model){
 		logger.info("complaintItem : " + complaintItem);

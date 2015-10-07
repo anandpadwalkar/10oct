@@ -12,4 +12,5 @@ public interface CMSUserDao {
 	public boolean editEmployeeOfDept(int id, String status);
 	public boolean deleteEmployeeOfDept(int id);
 	public List<ComplaintRepairEmployee> getComplaintRepairEmployee();
+	public List<Employee> getEmployee();
 }

@@ -18,7 +18,7 @@
 					<!-- <button id="add-item-btn" onclick="document.getElementById('popup').style.display=''" style="margin-bottom: 5px" type="button"
 						class="btn btn-success btn-sm"> -->
 						<button id="add-item-btn"  style="margin-bottom: 5px" type="button"
-						class="btn btn-success btn-sm">
+						class="btn btn-success btn-sm" data-toggle="tooltip"  data-original-title="Add New Item">
 						<i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp; ADD 
 					</button>
 				</div>
@@ -73,9 +73,9 @@
 										<tr class="odd gradeX">
 											<td>
 												<button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal" onclick="setItemId(${item.itemId})">
-													<i class="fa fa-times fa-fw"></i>
+													<i class="fa fa-times fa-fw" data-toggle="tooltip" data-placement="top" title="Delete"></i>
 												</button>
-												<button type="button" class="btn btn-warning btn-circle" id="update-item" 
+												<button type="button" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning btn-circle" id="update-item" 
 												onclick="updateItem(${item.itemId}, '${item.itemCode}', '${item.itemName}', ${item.minStock}, ${item.maxStock}, ${item.currentStock}, '${item.itemUnit}', ${item.deptId }, ${item.complaintTypeId } )">
 													<i class="fa fa-edit fa-fw" ></i>
 												</button>
@@ -264,7 +264,7 @@
 
 	<!-- Model Dialog -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-		<form action="./delete-item" method="post" id="delete-form">
+		<form action="../master/delete-item" method="post" id="delete-form">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -272,7 +272,7 @@
                                             <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
                                         </div>
                                         <div class="modal-body">
-                                            Delete this Item ?
+                                            Delete Complaint Item ?
                                         </div>
                                         <input type="hidden" name="complaintItemId" id="complaintItemId">
                                         <div class="modal-footer">
@@ -310,12 +310,14 @@
     
  	$(document).ready(function(){
 		
+ 		$('[data-toggle="tooltip"]').tooltip();
+ 		
 		 $('#dataTables-example').DataTable({
             responsive: true 
     });
 		 
 		$.ajax({
-			url:"./all-complaint-department",
+			url:"../master/all-complaint-department",
 			type:"POST",
 			success:function(response){
 				//alert(JSON.stringify(response));
@@ -349,7 +351,7 @@
 			
 			if(deptValue != 0){
 				$.ajax({
-					url:"./get-complaints",
+					url:"../master/get-complaints",
 					type:"POST",
 					data:{"deptId" : deptValue},
 					success:function(response){
@@ -395,7 +397,7 @@
 			$("#maxStock").val('');
 			$("#currentStock").val('');
 			
-			ajaxProperties.url = "./add-item";
+			ajaxProperties.url = "../master/add-item";
 		    ajaxProperties.formType = "complaint-item";
 		    ajaxProperties.operationType = "add";
 		    
@@ -515,7 +517,7 @@
         
         if("${operation}" == "add"){
         	//alert('add');
-        	$("#add-update-form").prop("action", "./add-item");
+        	$("#add-update-form").prop("action", "../master/add-item");
         	$("#popup").css('display', '');
         	$("#add-btn").val('Add');
         }
@@ -523,7 +525,7 @@
         
         if("${operation}" == "edit"){
         	//alert('edit');
-            $("#add-update-form").prop("action", "./update-item");
+            $("#add-update-form").prop("action", "../master/update-item");
         	$("#popup").css('display', '');
         	$("#add-btn").val('Update');
         }
@@ -556,7 +558,7 @@
 		$("#maxStock").val(maxStock);
 		$("#currentStock").val(currentStock);
 		
-		ajaxProperties.url = "./update-item";
+		ajaxProperties.url = "../master/update-item";
 	    ajaxProperties.formType = "complaint-item";
 	    ajaxProperties.operationType = "add";
 	    

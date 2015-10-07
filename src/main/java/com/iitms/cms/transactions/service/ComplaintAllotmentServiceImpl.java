@@ -20,6 +20,12 @@ public class ComplaintAllotmentServiceImpl implements ComplaintAllotmentService{
 	public List<ComplaintRegisterEntity> getAllComplaints() {
 		return complaintAllotmentDao.getAllComplaintsAllotment();
 	}
+
+	@Override
+	@Transactional
+	public boolean allotComplaints(String complaintIds, int complaintTypeId, int employeeId) {
+		return complaintAllotmentDao.allotComplaints(complaintIds, complaintTypeId, employeeId);
+	}
 	
 	
 }

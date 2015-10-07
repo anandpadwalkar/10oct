@@ -36,14 +36,14 @@ public class ComplaintTypeController {
 	private MessageSource messageSource;
 	
 	
-	@RequestMapping(value = "/get-complaints")
+	@RequestMapping(value = "/master/get-complaints")
 	public @ResponseBody List<ComplaintTypeEntity> getComplaintList(@RequestParam(required = false, defaultValue = "0") Integer deptId){
 		logger.info("Get complaints : " + deptId + " - " + complaintTypeService);
 		List<ComplaintTypeEntity> list = complaintTypeService.getComplaints(deptId);
 		return list;
 	}
 	
-	@RequestMapping(value = "/add-complaint", method = RequestMethod.POST)
+	@RequestMapping(value = "/master/add-complaint", method = RequestMethod.POST)
 	public @ResponseBody JsonResponse addComplaint(@Valid @ModelAttribute(value = "complaint") ComplaintTypeEntity complaint,
 						BindingResult result, Model model){
 		logger.info("Add Complaint : " + complaint + " Error :- "  + result.hasErrors());
@@ -73,7 +73,7 @@ public class ComplaintTypeController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/update-complaint", method = RequestMethod.POST)
+	@RequestMapping(value = "/master/update-complaint", method = RequestMethod.POST)
 	public @ResponseBody JsonResponse updateComplaint(@Valid @ModelAttribute(value = "complaint") ComplaintTypeEntity complaint,
 			BindingResult result, Model model){
 		logger.info("Edit Complaint : " + complaint + " Error :- "  + result.hasErrors());
@@ -103,14 +103,14 @@ public class ComplaintTypeController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/delete-complaint", method = RequestMethod.POST)
+	@RequestMapping(value = "/master/delete-complaint", method = RequestMethod.POST)
 	public String deleteComplaint(@RequestParam Integer id){
 		logger.info("Complaint : " + id);
 		complaintTypeService.deleteComplaint(id);
-		return "redirect:/complaint-type";
+		return "redirect:/master/complaint-type";
 	}
 	
-	@RequestMapping(value = "/complaint-type")
+	@RequestMapping(value = "/master/complaint-type")
 	public String getComplaintTypes(@RequestParam(name = "complaintTypeId", required = false, defaultValue = "0") int  complaintTypeId,
 			@RequestParam(name = "op", required = false, defaultValue = "") String operation,
 									Model model){
@@ -125,10 +125,10 @@ public class ComplaintTypeController {
 		model.addAttribute("complaint", entity);
 		List<ComplaintTypeEntity> list = complaintTypeService.getComplaints(0);
 		model.addAttribute("list", list);
-		return "department-type";
+		return "/master/complaint-type";
 	}
 	
-	@RequestMapping(value = "/check-complaint-type", method = RequestMethod.GET)
+	@RequestMapping(value = "/master/check-complaint-type", method = RequestMethod.GET)
 	public @ResponseBody boolean isComplaintTypeExist(@RequestParam(name  = "deptId") String deptId, @RequestParam String complaintTypeName){
 		logger.info("Check Complaint : " + deptId  + " - " + complaintTypeName);
 		return complaintTypeService.isComplaintTypeExist(Integer.parseInt(deptId), complaintTypeName);

@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iitms.cms.transactions.entity.ComplaintAllotmentEntity;
 import com.iitms.cms.transactions.entity.ComplaintRegisterEntity;
@@ -36,7 +39,15 @@ public class ComplaintAllotmentController {
 		return "/transaction/complaint-allotment";
 	}
 	
-
+	@RequestMapping(value = "/transaction/complaint-allotment", method = RequestMethod.POST)
+	private @ResponseBody String allotComplaint(@RequestParam String complaintIds, @RequestParam int complaintTypeId,
+			@RequestParam int employeeId){
+		          logger.info("Allot Params : " + complaintIds + " - " + complaintTypeId + " - " + employeeId);
+		          complaintAllotmentService.allotComplaints(complaintIds, complaintTypeId, employeeId);
+		return "/transaction/complaint-allotment";
+	}
+	
+	
 	
 	// temproray mapping start 
 	@RequestMapping("/transaction/complaint-item-order")

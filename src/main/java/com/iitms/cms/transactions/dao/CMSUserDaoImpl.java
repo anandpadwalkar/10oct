@@ -91,5 +91,20 @@ public class CMSUserDaoImpl implements CMSUserDao{
 		return count>0?true:false;
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Employee> getEmployee() {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		ProjectionList projection = Projections.projectionList();
+		projection.add(Projections.property("id").as("id"));
+		projection.add(Projections.property("employeeName").as("employeeName"));
+		
+		List<Employee> list = session.createCriteria(Employee.class)
+		.setProjection(projection)
+		.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP)
+		.list();
+		
+		return list;
+	}
 }

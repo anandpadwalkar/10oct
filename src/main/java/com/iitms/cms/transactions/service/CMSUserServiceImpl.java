@@ -12,7 +12,7 @@ import com.iitms.cms.transactions.entity.Employee;
 
 @Service
 public class CMSUserServiceImpl implements CMSUserService{
-
+ 
 	@Autowired
 	private CMSUserDao cmsUserDao;
 
@@ -53,6 +53,12 @@ public class CMSUserServiceImpl implements CMSUserService{
 	@Transactional
 	public boolean deleteEmployeeOfDept(int id) {
 		return cmsUserDao.deleteEmployeeOfDept(id);
+	}
+
+	@Override
+	@Transactional
+	public List<Employee> getEmployee() {
+		return cmsUserDao.getEmployee();
 	}
 	
 	
