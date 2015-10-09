@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.iitms</groupId>  
 	<artifactId>Complaint_Module</artifactId>
-	<name>CMS</name>
+	<name>RMS</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
